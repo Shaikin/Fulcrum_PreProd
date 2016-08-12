@@ -51,8 +51,8 @@ public class TestNGRunner extends Base{
 			}else{
 				System.out.println("All Classes under suites are generated..");
 			}
-				XMLUtil.createTestNGXML(xmlFilePath,"conf/TestNG/suites",runnableSuites,"Selenium Automation Suite-LAT Fluid TX-1.0");
-logsObj.logInfo("Done with Prequisite");
+				XMLUtil.createTestNGXML(xmlFilePath,"conf/TestNG/suites",runnableSuites,"Selenium Automation Suite-LAT Fulcrum Pre Prod-1.0");
+				logsObj.logInfo("Done with Prequisite");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
