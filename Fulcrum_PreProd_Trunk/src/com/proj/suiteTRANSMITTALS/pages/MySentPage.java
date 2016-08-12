@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 import org.openqa.selenium.WebDriver;
 
+import com.proj.Constants.Constants_Workflow;
 import com.proj.navigations.Navigations_Fulcrum;
 import com.proj.suiteTRANSMITTALS.TestSuiteBase;
 import com.proj.suiteTRANSMITTALS.reusables.TransmittalsGridUtil;
@@ -22,25 +23,25 @@ public class MySentPage extends TestSuiteBase{
 		String subject = null;
 		String status = null;
 		String TxComplete_Status = null;
-		if(data.get("Tramsmittals-TxType").equalsIgnoreCase("Correspondence")){
-			status="Closed";
-			TxComplete_Status="Completed";
+		if(data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_Corresponce)){
+			  TxComplete_Status ="Closed";
+			  status ="Completed";
 			subject=data.get("Tramsmittals-Subject");
 		}
-		else if(data.get("Tramsmittals-TxType").equalsIgnoreCase("Change Note")){
-			status="Sending…";
-			TxComplete_Status="Outstanding";
+		else if(data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_ChangeNote)){
+			TxComplete_Status   ="Sending…";
+			status="Outstanding";
 			subject=data.get("Tramsmittals-Subject");
 		}
-		else if (data.get("Tramsmittals-TxType").equalsIgnoreCase("Consultant Advice")){
-			status="Open";
-			TxComplete_Status="Outstanding";
+		else if (data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_ConsultantAdvice)){
+			TxComplete_Status ="Open";
+			status  ="Outstanding";
 			subject=data.get("Tramsmittals-Subject");
 		}
 
 		else if((data.get("Tramsmittals-TxType").equalsIgnoreCase("Change Note")||data.get("Tramsmittals-TxType").equalsIgnoreCase("Consultant Advice"))&& data.get("Action-Level2").equalsIgnoreCase("Forward")){
-			status="Open";
-			TxComplete_Status="Outstanding";
+			TxComplete_Status   ="Open";
+			status="Outstanding";
 			subject="FW:"+data.get("Tramsmittals-Subject");
 		}
 		Navigations_Fulcrum.Transmittals.navigateToMysent(driver);
