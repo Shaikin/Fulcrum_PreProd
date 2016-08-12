@@ -454,7 +454,11 @@ public class WebTableUtil extends TestBase{
 		String colXpath_search= "//table[@summary='containerName']/descendant :: tr /td[ToSearchColumn]";
 		if(actionColumnType.equalsIgnoreCase("LINK")){
 			colXpath_action="//table[@summary='containerName']/descendant :: tr /td[actionPerformCol]/a";
-		}else{
+		}
+		/*else if (actionColumnType.equalsIgnoreCase("Child Node Text")){
+			colXpath_action="//table[@summary='containerName']/descendant :: tr /td[actionPerformCol]/span";
+		}*/
+		else{
 			colXpath_action="//table[@summary='containerName']/descendant :: tr /td[actionPerformCol]";
 		}
 
