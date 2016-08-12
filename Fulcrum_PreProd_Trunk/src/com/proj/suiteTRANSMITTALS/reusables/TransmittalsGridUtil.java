@@ -53,7 +53,7 @@ public class TransmittalsGridUtil extends TestSuiteBase{
 	 * @throws Throwable 
 	 */
 	public static String searchSubjectAndCheck_TxComplete_Status(WebDriver driver,String page,String workflow,String subject,String TxComplete_Status) throws Throwable{
-		return WebTableUtil.searchforDataInsearchColumnAndValidateDataInactionableColumn(driver, testcaseName, workflow+" "+page+" - TxComplete_Status", ObjRepository.container_transmittals, subject, TxComplete_Status, 4, 12);
+		return WebTableUtil.searchforDataInsearchColumnAndValidateDataInactionableColumn(driver, testcaseName, workflow+" "+page+" - TxComplete_Status", ObjRepository.container_transmittals, subject, TxComplete_Status, 4, 13);
 	}
 	/**
 	 * Searches for the subject record in the grid and validates the status of the record 
@@ -65,7 +65,7 @@ public class TransmittalsGridUtil extends TestSuiteBase{
 	 * @throws Throwable 
 	 */
 	public static String searchSubjectAndCheck_Status(WebDriver driver,String page,String workflow,String subject,String status) throws Throwable{
-		return WebTableUtil.searchforDataInsearchColumnAndValidateDataInactionableColumn(driver, testcaseName, workflow+" "+page+" - Status", ObjRepository.container_transmittals, subject, status, 4, 13);
+		return WebTableUtil.searchforDataInsearchColumnAndValidateDataInactionableColumn(driver, testcaseName, workflow+" "+page+" - Status", ObjRepository.container_transmittals, subject, status, 4, 14);
 	}
 
 	public static String searchSubject(WebDriver driver,String page,String workflow,String subject) throws Throwable{
