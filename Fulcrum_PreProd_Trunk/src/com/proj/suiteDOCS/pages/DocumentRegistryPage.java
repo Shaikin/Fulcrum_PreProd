@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import com.frw.util.PageLoadWaitUtil;
 import com.frw.util.WaitUtil;
 import com.proj.Constants.Constants_TimeOuts;
-import com.proj.navigations.Navigations_FluidTX;
+import com.proj.navigations.Navigations_Fulcrum;
 import com.proj.suiteDOCS.TestSuiteBase;
 import com.proj.suiteDOCS.reusables.DocumentRegisterGridUtil;
 import com.proj.utilFulcrum.ToolbarsUtil;
@@ -15,7 +15,7 @@ import com.proj.utilFulcrum.ToolbarsUtil;
 public class DocumentRegistryPage extends TestSuiteBase{
 	
 	public static void selectADocument(WebDriver driver,String workflow,Hashtable<String,String>data) throws Throwable{
-		Navigations_FluidTX.navigateToDocumentRegister(driver);
+		Navigations_Fulcrum.navigateToDocumentsAndFileStorage(driver);
 		DocumentRegisterGridUtil.searchDocumentAndTickRecord(driver_DOCS, workflow, data.get("AttachDocumentName"));		
 	}
 
