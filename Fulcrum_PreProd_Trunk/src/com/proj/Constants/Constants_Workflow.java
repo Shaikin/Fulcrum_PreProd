@@ -13,7 +13,9 @@ public class Constants_Workflow {
 	//Conditions-Fulcrum
 	public static final String Fulcrum_WorkFlow_Condition="Tramsmittals-TxType";
 	public static final String Fulcrum_WorkFlow_Data_Condition="TxType";
-	public static final String Fulcrim_WorkFlow_ConsultantAdvice="Consultant Advice";
+	public static final String Fulcrum_WorkFlow_Corresponce="Correspondence";
+	public static final String Fulcrum_WorkFlow_ConsultantAdvice="Consultant Advice";
+	public static final String Fulcrum_WorkFlow_ChangeNote="Change Note";
 	
 	
 	
