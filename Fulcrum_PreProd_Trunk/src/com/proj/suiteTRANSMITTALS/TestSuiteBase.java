@@ -21,6 +21,7 @@ import com.proj.util.TestExecutionUtil;
 import com.proj.utilFulcrum.ApplicationMethods;
 import com.report.reporter.Reporting;
 
+
 public class TestSuiteBase extends TestBase {
 
 	public static WebDriver driver_TRANS=null;
@@ -47,10 +48,15 @@ public class TestSuiteBase extends TestBase {
 	@AfterSuite(alwaysRun = true)  
 
 	public void aftSuite() throws Throwable{
-
+		try{
+			Reporting.closeTagsForHTMLReportingEmail(TestBase.currentSuite_bfw, System.getProperty("user.dir")+"//Results", TestBase.CONFIG.getProperty("publishedResultsLocation"), TestBase.CONFIG.getProperty("emailFrom"), TestBase.CONFIG.getProperty("emailUser"), TestBase.CONFIG.getProperty("emailPassword"), TestBase.CONFIG.getProperty("emailReceipients"), TestBase.CONFIG.getProperty("emailSubject"), TestBase.CONFIG.getProperty("emailMessage"));
+		}catch(Exception ex){
+			System.out.println("HTML CLOSURE..");
+			ex.printStackTrace();
+		}
+		
 		Driver.close(driver_TRANS,browserName);
-		driver_TRANS=null;
-		Reporting.closeTagsForHTMLReportingEmail(currentSuite_bfw, System.getProperty("user.dir")+"//Results", CONFIG.getProperty("publishedResultsLocation"), CONFIG.getProperty("emailFrom"), CONFIG.getProperty("emailUser"), CONFIG.getProperty("emailPassword"), CONFIG.getProperty("emailReceipients"), CONFIG.getProperty("emailSubject"), CONFIG.getProperty("emailMessage"));		
+		driver_TRANS=null;		
 	}
 
 	@BeforeMethod
