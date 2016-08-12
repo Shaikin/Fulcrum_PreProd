@@ -155,7 +155,9 @@ public class KeyMethods extends TestBase{
 			case BUTTON_SCROLLABLE :
 				flag=KeysUtil.scrollAndClick(driver, refID, testcaseName, workFlow, Step, identifyBy, objectType, objectLocator, input, element);
 				break;
-			
+			case MOVETOELEMENT_CLICK :
+				flag=KeysUtil.moveToElementAndClick(driver, refID, testcaseName, workFlow, Step, identifyBy, objectType, objectLocator, input, element);
+				break;
 			}
 
 
@@ -322,6 +324,9 @@ public class KeyMethods extends TestBase{
 				break;
 			case BUTTON_SCROLLABLE :
 				flag=KeysUtil.scrollAndClick(driver, refID, testcaseName, workFlow, Step, identifyBy, objectType, objectLocator, input, element);
+				break;
+			case MOVETOELEMENT_CLICK :
+				flag=KeysUtil.moveToElementAndClick(driver, refID, testcaseName, workFlow, Step, identifyBy, objectType, objectLocator, input, element);
 				break;
 			}
 
