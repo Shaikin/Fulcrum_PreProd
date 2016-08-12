@@ -25,7 +25,7 @@ public class Navigations_Fulcrum extends TestBase{
 	static String className=Navigations_Fulcrum.class.getSimpleName();
 	private static String locator_menu_pattern=".//*[@class='expanded-item' and contains(text(),'objectlocator')]";
 	private static String locator_submenu_pattern="//*[contains(@class,'ui popup inverted')]/descendant :: * [text()='objectlocator']";
-	
+
 	private static Xls_Reader xlsReader_objects_Navigation=new Xls_Reader(Constants.OR_Nav_Path);
 
 	private static Hashtable<String,String>objects_step_Navigation=null;
@@ -48,13 +48,13 @@ public class Navigations_Fulcrum extends TestBase{
 	public static String checkSubMenusDisplayed(WebDriver driver) throws Throwable{
 		String flag=Constants_FRMWRK.False;
 		WebElement element=null;
-	
+
 		try{
 			element=ExplicitWaitUtil.waitForElement(driver,Constants_FRMWRK.FindElementByXPATH, ObjRepository.container_subMenu, Constants_TimeOuts.generic_TimeOut) ;
 		}catch(Exception ex){
-			
+
 		}
-		
+
 		if(element!=null){
 			if(element.isDisplayed()==true){
 				WaitUtil.pause(1);
@@ -74,7 +74,7 @@ public class Navigations_Fulcrum extends TestBase{
 		}
 
 	}
-	
+
 	public static void navigateToDocumentsAndFileStorage(WebDriver driver) throws Throwable{
 		commonMethods.switchToDefaultPage(driver);
 		if(checkSubMenusDisplayed(driver).equalsIgnoreCase(Constants_FRMWRK.False)){
@@ -86,9 +86,29 @@ public class Navigations_Fulcrum extends TestBase{
 		}
 
 	}
-	
-	
-	
+
+	public static void navigateToActionRequired(WebDriver driver) throws Throwable{
+		commonMethods.switchToDefaultPage(driver);		
+		String locator=locator_menu_pattern.replaceAll("objectlocator", objects_objectLocator_Navigation.get("Usersite Menu - Action Required"));
+		res=KeyMethods.f_performAction(driver, refID, testcaseName, "", objects_step_Navigation.get("Usersite Menu - Action Required"), objects_locatorType_Navigation.get("Usersite Menu - Action Required"), objects_objectType_Navigation.get("Usersite Menu - Action Required"),locator , "");
+		if(res.equals(Constants_FRMWRK.False)){
+			CustomExceptions.Exit(locator, " Navigate Failure - Usersite Menu - Action Required", "Please refer above details for more details");
+		}
+
+
+	}
+
+	public static void navigateToActionsOverdue(WebDriver driver) throws Throwable{
+		commonMethods.switchToDefaultPage(driver);		
+		String locator=locator_menu_pattern.replaceAll("objectlocator", objects_objectLocator_Navigation.get("Usersite Menu - Actions Overdue"));
+		res=KeyMethods.f_performAction(driver, refID, testcaseName, "", objects_step_Navigation.get("Usersite Menu - Actions Overdue"), objects_locatorType_Navigation.get("Usersite Menu - Actions Overdue"), objects_objectType_Navigation.get("Usersite Menu - Actions Overdue"),locator , "");
+		if(res.equals(Constants_FRMWRK.False)){
+			CustomExceptions.Exit(locator, " Navigate Failure - Usersite Menu - Usersite Menu - Actions Overdue", "Please refer above details for more details");
+		}
+
+
+	}
+
 	public static class Transmittals{
 		public static void navigateToNewTransmittal(WebDriver driver) throws Throwable{
 			navigateToTramsmittals(driver);
@@ -97,15 +117,14 @@ public class Navigations_Fulcrum extends TestBase{
 			res=KeyMethods.f_performAction(driver, refID, testcaseName, "", objects_step_Navigation.get("Usersite SubMenu - New Transmittal"), objects_locatorType_Navigation.get("Usersite SubMenu - New Transmittal"), objects_objectType_Navigation.get("Usersite SubMenu - New Transmittal"),locator , "");
 			if(res.equals(Constants_FRMWRK.False)){
 				CustomExceptions.Exit(locator, " Navigate Failure - New Transmittal", "Please refer above details for more details");
-			}
-			//ApplicationMethods_Falcrum.getApplicationFrameCount(driver);
+			}			
 		}
 
 		public static void navigateToMysent(WebDriver driver) throws Throwable{
 			navigateToTramsmittals(driver);
 			String key_step="Usersite SubMenu - My Sent";
 			String locator=locator_submenu_pattern.replaceAll("objectlocator", objects_objectLocator_Navigation.get(key_step));
-			
+
 			res=KeyMethods.f_performAction(driver, refID, testcaseName, "", objects_step_Navigation.get(key_step), objects_locatorType_Navigation.get(key_step), objects_objectType_Navigation.get(key_step),locator , "");
 			if(res.equals(Constants_FRMWRK.False)){
 				CustomExceptions.Exit(locator, " Navigate Failure - My Sent", "Please refer above details for more details");
@@ -116,7 +135,7 @@ public class Navigations_Fulcrum extends TestBase{
 			navigateToTramsmittals(driver);
 			String key_step="Usersite SubMenu - My Inbox";
 			String locator=locator_submenu_pattern.replaceAll("objectlocator", objects_objectLocator_Navigation.get(key_step));
-			
+
 			res=KeyMethods.f_performAction(driver, refID, testcaseName, "", objects_step_Navigation.get(key_step), objects_locatorType_Navigation.get(key_step), objects_objectType_Navigation.get(key_step),locator , "");
 			if(res.equals(Constants_FRMWRK.False)){
 				CustomExceptions.Exit(locator, " Navigate Failure - My Inbox", "Please refer above details for more details");
@@ -124,13 +143,13 @@ public class Navigations_Fulcrum extends TestBase{
 		}
 
 	}
-	
+
 	public static class DocumentsAndFileStorage{
 		public static void navigateToBusinessCenter(WebDriver driver) throws Throwable{
 			navigateToDocumentsAndFileStorage(driver);
 			String key_step="Usersite SubMenu - Business Case";
 			String locator=locator_submenu_pattern.replaceAll("objectlocator", objects_objectLocator_Navigation.get(key_step));
-			
+
 			res=KeyMethods.f_performAction(driver, refID, testcaseName, "", objects_step_Navigation.get(key_step), objects_locatorType_Navigation.get(key_step), objects_objectType_Navigation.get(key_step),locator , "");
 			if(res.equals(Constants_FRMWRK.False)){
 				CustomExceptions.Exit(locator, " Navigate Failure - Business Center", "Please refer above details for more details");
