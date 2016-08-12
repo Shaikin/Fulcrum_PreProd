@@ -5,23 +5,14 @@ import java.util.Hashtable;
 import org.openqa.selenium.WebDriver;
 
 import com.frw.Constants.Constants_FRMWRK;
-import com.frw.util.WaitUtil;
-import com.proj.Constants.Constants;
-import com.proj.Constants.Constants_Messages;
-import com.proj.Constants.Constants_TimeOuts;
-import com.proj.Constants.Constants_Workflow;
-import com.proj.navigations.Navigations_FluidTX;
 import com.proj.navigations.Navigations_Fulcrum;
-import com.proj.suiteDOCS.pages.DocumentRegistryPage;
 import com.proj.suiteTRANSMITTALS.TestSuiteBase;
-import com.proj.suiteTRANSMITTALS.pages.MyInboxAndActionRequiredPage_FluidTx;
-import com.proj.suiteTRANSMITTALS.pages.MySentPage_FluidTx;
+import com.proj.suiteTRANSMITTALS.pages.MyInboxAndActionRequiredPage_Fulcrum;
+import com.proj.suiteTRANSMITTALS.pages.MySentPage;
 import com.proj.suiteTRANSMITTALS.pages.Transmittals_EntryPage;
 import com.proj.suiteTRANSMITTALS.reusables.TransmittalsGridUtil;
 import com.proj.util.CustomExceptions;
 import com.proj.utilFulcrum.ApplicationMethods;
-import com.proj.utilFulcrum.PopupUtil;
-import com.report.reporter.Reporting;
 
 public class Workflows extends TestSuiteBase{
 	static String getResult;
@@ -47,7 +38,7 @@ public class Workflows extends TestSuiteBase{
 			CustomExceptions.Exit(testcaseName, "Failure during New Transmittal entry for the test case"+testcaseName, "Please refer the above error details for more information");
 		}
 
-		getResult=MySentPage_FluidTx.validate_TxComplete_StatusAndStatus(driver, worflow_l1, transmittalData);
+		getResult=MySentPage.validate_TxComplete_StatusAndStatus(driver, worflow_l1, transmittalData);
 
 		if(getResult.equalsIgnoreCase(Constants_FRMWRK.False)){
 			CustomExceptions.Exit(testcaseName, worflow_l1+"- Failure", "Unable to continue the test due to above error ");
@@ -56,7 +47,16 @@ public class Workflows extends TestSuiteBase{
 	}
 
 
-
+	public static WebDriver Level2_Validate_And_DownloadFiles(String siteName,String validationPage,WebDriver driver,String refid,String testcasename,String workflow_l2,String condition,String workflow_end,String url,String browsername,String username2,String password2,Hashtable<String,String>transmittalData,Hashtable<String,String>testData,int userIteration ) throws Throwable{
+		workflow_l2=workflow_l2+condition+" - validate & Download"+workflow_end;
+		ApplicationMethods.logOutFromApplicationAndcloseBrowser(driver,refid,testcasename);
+		driver=ApplicationMethods.launchBrowserAndlogIntoApplication(browsername, url, username2, password2,refID);
+		MyInboxAndActionRequiredPage_Fulcrum.validate_TxComplete_StatusAndStatus(driver,validationPage, workflow_l2, transmittalData,testData);
+		TransmittalsGridUtil.searchSubjectAndOpenRecord(driver,validationPage, workflow_l2+"-Download", transmittalData.get("Tramsmittals-Subject"));
+		Transmittals_EntryPage.verifyAttachedFilesAndClick(siteName,driver,testcasename,refid,workflow_l2,testData);
+		return driver;		
+	}
+/*
 	public static WebDriver Level2_Validate_OR_Submit_OR_ApproveOrReject_OR_Forward_OR_ReplyAll_Transmittal(String siteName,String validationPage,WebDriver driver,String refid,String testcasename,String workflow_l2,String condition,String workflow_end,String url,String browsername,String username2,String password2,Hashtable<String,String>transmittalData,Hashtable<String,String>testData,int userIteration ) throws Throwable{
 		transmittalData.put("Tramsmittals-Level2-Reciever", String.valueOf(userIteration));
 		if(testData.get(Constants_Workflow.FluidTX_WorkFlow_Data_Condition).equalsIgnoreCase(Constants_Workflow.FluidTX_WorkFlow_IssuedForInformation)){
@@ -267,7 +267,7 @@ public class Workflows extends TestSuiteBase{
 
 
 
-	/**
+	*//**
 	 * Initiation of Transmittal from Document Register
 	 * @author shaikka
 	 * @param driver
@@ -275,7 +275,7 @@ public class Workflows extends TestSuiteBase{
 	 * @param worflow_l1
 	 * @param data
 	 * @throws Throwable
-	 */
+	 *//*
 	public static Hashtable<String,String> Level1_Initaite_Transmittal_FromDocumentRegister(WebDriver driver,String url,String worflow_l1,Hashtable<String,String>data) throws Throwable{
 
 		Hashtable<String,String>transmittalData=new Hashtable<String,String>();
@@ -295,7 +295,7 @@ public class Workflows extends TestSuiteBase{
 			CustomExceptions.Exit(testcaseName, "Failure during New Transmittal entry for the test case"+testcaseName, "Please refer the above error details for more information");
 		}
 
-		getResult=MySentPage_FluidTx.validate_TxComplete_StatusAndStatus(driver, worflow_l1, transmittalData);
+		getResult=MySentPage.validate_TxComplete_StatusAndStatus(driver, worflow_l1, transmittalData);
 
 		if(getResult.equalsIgnoreCase(Constants_FRMWRK.False)){
 			CustomExceptions.Exit(testcaseName, worflow_l1+"- Failure", "Unable to continue the test due to above error ");
@@ -448,5 +448,5 @@ public class Workflows extends TestSuiteBase{
 		}
 
 		return driver;
-	}
+	}*/
 }
