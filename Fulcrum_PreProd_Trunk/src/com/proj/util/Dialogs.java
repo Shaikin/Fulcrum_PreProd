@@ -149,43 +149,50 @@ public class Dialogs {
 		AutoIT_ActionsUtil.clickElement(handle, button_OK);	
 	}
 	
-public static void ViewDownloads(WebDriver driver,String dailogName,String filePath) throws Exception{
-		
-		File file =new File(filePath);
-		if(file.exists()){
-			file.delete();
+public static String ViewDownloads(WebDriver driver,String dailogName,String filePath,String refid,String testcasename,String workflow) throws Exception{
+		String flag =Constants_FRMWRK.False;
+		try{
+			File file =new File(filePath);
+			if(file.exists()){
+				file.delete();
+			}
+			Thread.sleep(5000);
+			AutoITUtil.openDownloadsWindow(driver);
+			Thread.sleep(3000);
+			AutoITUtil.loadJocobDLL();
+			WindowHandler handle=AutoIT_ActionsUtil.getHandler();
+
+
+			WindowElement windowElement=AutoIT_ActionsUtil.getDialog(handle,dailogName);
+			WindowElement button_clearList=AutoIT_ActionsUtil.elementByName(handle, windowElement, "Clear list");
+			AutoIT_ActionsUtil.clickElement(handle, button_clearList);
+
+
+			List<WindowElement> elements=AutoIT_ActionsUtil.elementsByLocalizedControlType(handle, windowElement, "split button");
+			AutoIT_ActionsUtil.clickElement(handle, elements.get(1));
+			AutoITUtil.robo_click_saveAs();
+
+			
+
+			//*********************** Save As Dialog ***********************************************************
+			WindowElement saveAsDailog_element=AutoIT_ActionsUtil.elementByName(handle, windowElement, "Save As");		Thread.sleep(1000);
+			AutoITUtil.robo_click_backspace();
+			WindowElement editElement=AutoIT_ActionsUtil.elementByClassName(handle, saveAsDailog_element, "Edit");
+
+			AutoIT_ActionsUtil.clear(handle, editElement);		
+			AutoIT_ActionsUtil.type(handle, editElement, filePath);
+
+			WindowElement button_save=AutoIT_ActionsUtil.elementByName(handle, saveAsDailog_element, "Save");
+			AutoIT_ActionsUtil.clickElement(handle, button_save);
+			WindowElement button_close=AutoIT_ActionsUtil.elementByName(handle, windowElement, "Close");
+			AutoIT_ActionsUtil.clickElement(handle, button_close);
+			Thread.sleep(3000);			
+			Reporting.logStep(driver, refid, testcasename, workflow+"-Download File", "Sucessfully downloaded the file at "+filePath, Constants_FRMWRK.Pass);
+			flag=Constants_FRMWRK.True;
+		}catch (Throwable t){
+			t.printStackTrace();
+			Reporting.logStep(driver, refid, testcasename,workflow+"-Download File",   "Unable to download the file "+filePath+" due to -->"+commonMethods.getStackTrace(t), Constants_FRMWRK.Fail);
 		}
-		Thread.sleep(5000);
-		AutoITUtil.openDownloadsWindow(driver);
-		Thread.sleep(3000);
-		AutoITUtil.loadJocobDLL();
-		WindowHandler handle=AutoIT_ActionsUtil.getHandler();
-
-
-		WindowElement windowElement=AutoIT_ActionsUtil.getDialog(handle,dailogName);
-		WindowElement button_clearList=AutoIT_ActionsUtil.elementByName(handle, windowElement, "Clear list");
-		AutoIT_ActionsUtil.clickElement(handle, button_clearList);
-
-
-		List<WindowElement> elements=AutoIT_ActionsUtil.elementsByLocalizedControlType(handle, windowElement, "split button");
-		AutoIT_ActionsUtil.clickElement(handle, elements.get(1));
-		AutoITUtil.robo_click_saveAs();
-
-		
-
-		//*********************** Save As Dialog ***********************************************************
-		WindowElement saveAsDailog_element=AutoIT_ActionsUtil.elementByName(handle, windowElement, "Save As");		Thread.sleep(1000);
-		AutoITUtil.robo_click_backspace();
-		WindowElement editElement=AutoIT_ActionsUtil.elementByClassName(handle, saveAsDailog_element, "Edit");
-
-		AutoIT_ActionsUtil.clear(handle, editElement);		
-		AutoIT_ActionsUtil.type(handle, editElement, filePath);
-
-		WindowElement button_save=AutoIT_ActionsUtil.elementByName(handle, saveAsDailog_element, "Save");
-		AutoIT_ActionsUtil.clickElement(handle, button_save);
-		WindowElement button_close=AutoIT_ActionsUtil.elementByName(handle, windowElement, "Close");
-		AutoIT_ActionsUtil.clickElement(handle, button_close);
-		Thread.sleep(3000);
-		System.out.println("Done....");
+		return flag;
 	}
 }
