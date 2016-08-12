@@ -44,10 +44,10 @@ public class TestSuiteBase extends TestBase {
 
 	@AfterSuite(alwaysRun = true)
 	public void aftSuite() throws Throwable{
-
+		Reporting.closeTagsForHTMLReportingEmail(currentSuite_bfw, System.getProperty("user.dir")+"//Results", CONFIG.getProperty("publishedResultsLocation"), CONFIG.getProperty("emailFrom"), CONFIG.getProperty("emailUser"), CONFIG.getProperty("emailPassword"), CONFIG.getProperty("emailReceipients"), CONFIG.getProperty("emailSubject"), CONFIG.getProperty("emailMessage"));
 		Driver.close(driver_DOCS,browserName);
 		driver_DOCS=null;
-		Reporting.closeTagsForHTMLReportingEmail(currentSuite_bfw, System.getProperty("user.dir")+"//Results", CONFIG.getProperty("publishedResultsLocation"), CONFIG.getProperty("emailFrom"), CONFIG.getProperty("emailUser"), CONFIG.getProperty("emailPassword"), CONFIG.getProperty("emailReceipients"), CONFIG.getProperty("emailSubject"), CONFIG.getProperty("emailMessage"));		
+				
 	}
 
 	@BeforeMethod
@@ -57,7 +57,6 @@ public class TestSuiteBase extends TestBase {
 			driver_DOCS=ApplicationMethods.launchBrowserAndlogIntoApplication(browserName, Constants_ConfigProperties.testSiteName, Constants_ConfigProperties.username_SuperUser, Constants_ConfigProperties.password_SuperUser, refID);
 			logsObj.log("Before method success for "+testcaseName);
 			isBeforeMethodPass_docs=Constants_FRMWRK.TrueB;
-
 
 		} catch (Throwable t) {
 			isTestPass=Constants_FRMWRK.FalseB;
