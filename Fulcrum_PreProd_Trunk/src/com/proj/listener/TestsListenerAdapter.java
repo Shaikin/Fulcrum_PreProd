@@ -18,7 +18,6 @@ import org.testng.Reporter;
 import com.frw.Constants.Constants_FRMWRK;
 import com.proj.base.TestBase;
 import com.proj.util.TestExecutionUtil;
-import com.report.reporter.Reporting;
 
 public class TestsListenerAdapter implements ITestListener, ISuiteListener, IInvokedMethodListener {
 	private String beforeMethodName="befMethod";
@@ -50,13 +49,6 @@ public class TestsListenerAdapter implements ITestListener, ISuiteListener, IInv
 		TestBase.logsObj.log("About to end executing Suite " + arg0.getName());
 		TestBase.logsObj.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		Reporter.log("About to end executing Suite " + arg0.getName(), true);
-		try {
-			Reporting.closeTagsForHTMLReportingEmail(TestBase.currentSuite_bfw, System.getProperty("user.dir")+"//Results", TestBase.CONFIG.getProperty("publishedResultsLocation"), TestBase.CONFIG.getProperty("emailFrom"), TestBase.CONFIG.getProperty("emailUser"), TestBase.CONFIG.getProperty("emailPassword"), TestBase.CONFIG.getProperty("emailReceipients"), TestBase.CONFIG.getProperty("emailSubject"), TestBase.CONFIG.getProperty("emailMessage"));
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		
-
 	}
 
 	// This belongs to ITestListener and will execute before starting of Test set/batch 
