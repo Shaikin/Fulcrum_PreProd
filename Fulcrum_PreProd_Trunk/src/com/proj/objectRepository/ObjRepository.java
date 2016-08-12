@@ -9,7 +9,7 @@ public class ObjRepository {
 	public static String button_login_Login="logon:logon";	
 	
 	//Homepage
-	public static String homePage_element="inplaceSearchDiv_WPQ1_lsinput";
+	public static String homePage_element="txtSearch";
 	
 	//Overlays
 	public static String heading_working=".//*[@title='Working on it...']";
@@ -41,7 +41,7 @@ public class ObjRepository {
 
 	//Grid Container
 	public static String container_subMenu="//*[@class='ui popup inverted right center']";
-	public static String container_transmittals="Transmittals";
+	public static String container_transmittals="Mail";
 	public static String container_documentRegister="Document Register";
 	public static String container_transmittalFiles="transmittalFiles";
 	public static String container_supportingDocumentFiles="supportingDocumentFiles";
