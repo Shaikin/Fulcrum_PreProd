@@ -529,7 +529,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 			KeyMethods.f_performAction(driver,refid,testcasename,workflow,"Tramsmittals-View -Transmittal Files-Download",objects_locatorType_Transmittals,objects_objectType_Transmittals,objects_objectLocator_Transmittals,input);
 			WaitUtil.pause(Constants_TimeOuts.generic_TimeOut);
 			String downloadFile= Constants.DataFileLocation_Transmittal+"DownloadTX_"+data.get("AttachDocumentName");
-			Dialogs.ViewDownloads(driver,"View Downloads - Internet Explorer", downloadFile);
+			Dialogs.ViewDownloads(driver,"View Downloads - Internet Explorer", downloadFile,refid,testcasename,workflow);
 		}		
 		if(!data.get("AttachSupportDocuments").isEmpty()){
 			ApplicationMethods.switchToLatestDLGframe(driver, testcasename);
@@ -538,7 +538,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 			KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Tramsmittals-View -Supporting Document Files-Download", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, input);
 			WaitUtil.pause(Constants_TimeOuts.generic_TimeOut);
 			String downloadFile= Constants.DataFileLocation_Transmittal+"DownloadSupport_"+data.get("AttachSupportDocumentName");
-			Dialogs.ViewDownloads(driver,"View Downloads - Internet Explorer", downloadFile);
+			Dialogs.ViewDownloads(driver,"View Downloads - Internet Explorer", downloadFile,refid,testcasename,workflow);
 		}
 	}
 	
