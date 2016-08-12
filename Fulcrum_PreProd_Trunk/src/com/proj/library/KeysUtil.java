@@ -948,4 +948,21 @@ public class KeysUtil extends KeyMethods{
 		}
 		return flag;
 	}
+	
+	protected static String moveToElementAndClick(WebDriver driver,String refID,String testcaseName,String workFlow,String Step,String locatorType, String objectType, String objectLocator,String input,WebElement element){
+		String flag=Constants_FRMWRK.False;
+		String generic_Step="Move to Element & Click on ";
+		Step=workFlow+generic_Step+Step;
+		try{
+			Actions act =new Actions(driver);
+			act.moveToElement(element).click().build().perform();			
+			logsObj.log(testcaseName+"-->"+objectLocator+" exists ,Moved to the Element and clicked ");
+			Reporting.logStep(driver, refID, Step,  objectType+": "+objectLocator+" exists ,Moved to the Element and clicked  ", Constants_FRMWRK.Pass);
+			flag=Constants_FRMWRK.True;
+		}catch(Exception ex){
+			Reporting.logStep(driver, refID, Step,  objectType+": "+objectLocator+" not able to Move to the Element and click due to "+commonMethods.getStackTrace(ex), Constants_FRMWRK.Fail);
+		}
+		return flag;
+	}
+	
 }
