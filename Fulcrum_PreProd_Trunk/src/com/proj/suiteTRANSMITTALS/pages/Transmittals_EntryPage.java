@@ -2,7 +2,10 @@ package com.proj.suiteTRANSMITTALS.pages;
 
 import java.util.Hashtable;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 
 import com.frw.Constants.Constants_FRMWRK;
 import com.frw.util.DateUtil;
@@ -17,6 +20,7 @@ import com.proj.library.commonMethods;
 import com.proj.objectRepository.ObjRepository;
 import com.proj.suiteTRANSMITTALS.TestSuiteBase;
 import com.proj.util.CustomExceptions;
+import com.proj.util.Dialogs;
 import com.proj.util.fetchObjectRepository;
 import com.proj.utilFulcrum.ApplicationMethods;
 import com.proj.utilFulcrum.WebTableUtil;
@@ -55,11 +59,9 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 	}
 
 	public static void switchToTramsmittalEditFrame(WebDriver driver,String refID,String testcaseName,String workFlow) throws Throwable{
-		//KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, objects_step_Transmittals.get("Tramsmittals-Switch to Tramsmittal Edit Frame"), objects_locatorType_Transmittals.get("Tramsmittals-Switch to Tramsmittal Edit Frame"), objects_objectType_Transmittals.get("Tramsmittals-Switch to Tramsmittal Edit Frame"), objects_objectLocator_Transmittals.get("Tramsmittals-Switch to Tramsmittal Edit Frame"), input);
 		ApplicationMethods.switchToLatestDLGframe(driver, testcaseName);
 	}
 	public static void switchToTramsmittalViewFrame(WebDriver driver,String refID,String testcaseName,String workFlow) throws Throwable{
-		//KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, objects_step_Transmittals.get("Tramsmittals-Switch to Tramsmittal View Frame"), objects_locatorType_Transmittals.get("Tramsmittals-Switch to Tramsmittal View Frame"), objects_objectType_Transmittals.get("Tramsmittals-Switch to Tramsmittal View Frame"), objects_objectLocator_Transmittals.get("Tramsmittals-Switch to Tramsmittal View Frame"), input);
 		ApplicationMethods.switchToLatestDLGframe(driver, testcaseName);
 	}
 	
@@ -283,13 +285,13 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 			returnData.put("Tramsmittals-TxType", data.get("TxType"));
 		}
 		WaitUtil.pause(Constants_TimeOuts.generic_TimeOut);
-		if(appName.equals(Constants.App_Fulcrum)){
-			res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-ReasonForIssue", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, data.get("ReasonForIssue"));
-			returnData.put("Tramsmittals-ReasonForIssue", res);
-		}else{
-			res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-Issue Reason", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, data.get("IssueReason"));
-			returnData.put("Tramsmittals-Issue Reason", res);
-		}
+
+		res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-ReasonForIssue", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, data.get("ReasonForIssue"));
+		returnData.put("Tramsmittals-ReasonForIssue", res);
+
+		res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals- Response Required", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, data.get("ResponseRequired"));
+		returnData.put("Tramsmittals- Response Required", res);
+
 		String dueDate = null;
 		dueDate=getDueDate(appName, data.get("Action-Level2"));
 		returnData.put("Action-Level2", data.get("Action-Level2"));
@@ -435,7 +437,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 		clickEditTab(driver, refid, testcasename, workflow);
 		if(appName.equals(Constants.App_Fulcrum)){
 			condition=Constants_Workflow.Fulcrum_WorkFlow_Data_Condition;
-			condition_workFlow=Constants_Workflow.Fulcrim_WorkFlow_ConsultantAdvice;			
+			condition_workFlow=Constants_Workflow.Fulcrum_WorkFlow_ConsultantAdvice;			
 		}else{
 			condition=Constants_Workflow.FluidTX_WorkFlow_Data_Condition;
 			condition_workFlow=Constants_Workflow.FluidTX_WorkFlow_IssuedForReview;
@@ -464,7 +466,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 				res=KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Tramsmittals-Document Registry", objects_locatorType_Transmittals_toolbar, objects_objectType_Transmittals_toolbar, objects_objectLocator_Transmittals_toolbar, data.get("AttachDocuments"));
 				switchToDocumentsListFrame(driver);
 				String page ="Attach Document";
-				WebTableUtil.searchforDataInsearchColumnAndClickInactionableLinkColumn(driver, testcaseName, workflow+" "+page+" - Select a Document", ObjRepository.container_documentRegister, data.get("AttachDocumentName"),"Text", data.get("AttachDocumentName"), 2, 1);
+				WebTableUtil.searchforDataInsearchColumnAndClickInactionableLinkColumn(driver, testcaseName, workflow+" "+page+" - Select a Document", ObjRepository.container_documentRegister, data.get("AttachDocumentName"),"Text", data.get("AttachDocumentName"), 3, 1);
 				res=KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Tramsmittals-Attach", objects_locatorType_Transmittals_toolbar, objects_objectType_Transmittals_toolbar, objects_objectLocator_Transmittals_toolbar, input);
 				ApplicationMethods.waitForOverlayToDisappear(driver);
 			}			
@@ -483,7 +485,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 			res=KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Tramsmittals-Document Registry", objects_locatorType_Transmittals_toolbar, objects_objectType_Transmittals_toolbar, objects_objectLocator_Transmittals_toolbar, data.get("AttachSupportDocuments"));
 			switchToDocumentsListFrame(driver);
 			String page ="Attach Support Document";
-			WebTableUtil.searchforDataInsearchColumnAndClickInactionableLinkColumn(driver, testcaseName, workflow+" "+page+" - Select a Document", ObjRepository.container_documentRegister, data.get("AttachSupportDocumentName"),"Text", data.get("AttachSupportDocumentName"), 2, 1);
+			WebTableUtil.searchforDataInsearchColumnAndClickInactionableLinkColumn(driver, testcaseName, workflow+" "+page+" - Select a Document", ObjRepository.container_documentRegister, data.get("AttachSupportDocumentName"),"Text", data.get("AttachSupportDocumentName"), 3, 1);
 			res=KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Tramsmittals-Attach", objects_locatorType_Transmittals_toolbar, objects_objectType_Transmittals_toolbar, objects_objectLocator_Transmittals_toolbar, input);
 			ApplicationMethods.waitForOverlayToDisappear(driver);			
 			
@@ -495,7 +497,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 		
 	}
 	
-	public static void verifyAttachedFiles(String appName,WebDriver driver,String testcasename,String refid,String workflow,Hashtable<String,String>data) throws Throwable{
+	/*public static void verifyAttachedFiles(String appName,WebDriver driver,String testcasename,String refid,String workflow,Hashtable<String,String>data) throws Throwable{
 		if(data.get(Constants_Workflow.FluidTX_WorkFlow_Data_Condition).equalsIgnoreCase(Constants_Workflow.FluidTX_WorkFlow_IssuedForReview) && !data.get("ReviewDocument").isEmpty()){
 			ApplicationMethods.switchToLatestDLGframe(driver, testcasename);
 			String locator=objects_objectLocator_Transmittals.get("Tramsmittals-View - Attached Review Document Files").replaceAll("docName", data.get("ReviewDocument"));
@@ -515,6 +517,28 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 			String locator=objects_objectLocator_Transmittals.get("Tramsmittals-View -Supporting Document Files").replaceAll("docName", data.get("AttachSupportDocumentName"));
 			objects_objectLocator_Transmittals.put("Tramsmittals-View -Supporting Document Files", locator);
 			KeyMethods.f_fetchElementDetails(driver, refid, testcasename, workflow, "Tramsmittals-View -Supporting Document Files", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, data.get("AttachSupportDocumentName"));
+		}
+	}*/
+	
+	public static void verifyAttachedFilesAndClick(String appName,WebDriver driver,String testcasename,String refid,String workflow,Hashtable<String,String>data) throws Throwable{
+		
+		if(!data.get("AttachDocuments").isEmpty()){	
+			ApplicationMethods.switchToLatestDLGframe(driver, testcasename);
+			String locator=objects_objectLocator_Transmittals.get("Tramsmittals-View -Transmittal Files").replaceAll("docName", data.get("AttachDocumentName"));
+			objects_objectLocator_Transmittals.put("Tramsmittals-View -Transmittal Files-Download", locator);
+			KeyMethods.f_performAction(driver,refid,testcasename,workflow,"Tramsmittals-View -Transmittal Files-Download",objects_locatorType_Transmittals,objects_objectType_Transmittals,objects_objectLocator_Transmittals,input);
+			WaitUtil.pause(Constants_TimeOuts.generic_TimeOut);
+			String downloadFile= Constants.DataFileLocation_Transmittal+"DownloadTX_"+data.get("AttachDocumentName");
+			Dialogs.ViewDownloads(driver,"View Downloads - Internet Explorer", downloadFile);
+		}		
+		if(!data.get("AttachSupportDocuments").isEmpty()){
+			ApplicationMethods.switchToLatestDLGframe(driver, testcasename);
+			String locator=objects_objectLocator_Transmittals.get("Tramsmittals-View -Supporting Document Files").replaceAll("docName", data.get("AttachSupportDocumentName"));
+			objects_objectLocator_Transmittals.put("Tramsmittals-View -Supporting Document Files-Download", locator);
+			KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Tramsmittals-View -Supporting Document Files-Download", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, input);
+			WaitUtil.pause(Constants_TimeOuts.generic_TimeOut);
+			String downloadFile= Constants.DataFileLocation_Transmittal+"DownloadSupport_"+data.get("AttachSupportDocumentName");
+			Dialogs.ViewDownloads(driver,"View Downloads - Internet Explorer", downloadFile);
 		}
 	}
 	
