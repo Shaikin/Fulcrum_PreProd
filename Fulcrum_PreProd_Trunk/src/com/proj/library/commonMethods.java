@@ -20,6 +20,7 @@ import org.testng.Reporter;
 import com.frw.Constants.Constants_FRMWRK;
 import com.frw.util.PageLoadWaitUtil;
 import com.frw.util.WaitUtil;
+import com.frw.wait.ExplicitWaitUtil;
 import com.google.common.base.Throwables;
 import com.proj.Constants.Constants;
 import com.proj.Constants.Constants_TimeOuts;
@@ -361,6 +362,35 @@ public class commonMethods extends TestBase{
 		}
 		
 		
+	}
+	/**
+	 * Verifies the given locator displayed in the page.
+	 * Return true for success otherwise false 
+	 * @author shaik
+	 * @date Aug 17 2016
+	 * @param driver
+	 * @param locatorType
+	 * @param locator
+	 * @return
+	 */
+	
+	@SuppressWarnings("unused")
+	public static boolean isElementDisplayed(WebDriver driver,String locatorType,String locator){
+		boolean flag=Constants_FRMWRK.FalseB;
+		WebElement element=null;
+		
+		try{
+			ExplicitWaitUtil.waitForElement(driver, locatorType, locator, Constants_TimeOuts.Element_TimeOut);
+		}catch(Throwable t){
+			
+		}		
+		if(element!=null){
+			if(element.isDisplayed()==true){
+				WaitUtil.pause(1);
+				flag=Constants_FRMWRK.TrueB;
+			}			
+		}
+		return flag;
 	}
 }
 
