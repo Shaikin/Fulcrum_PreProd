@@ -13,6 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import com.frw.Constants.Constants_FRMWRK;
+import com.frw.enums.ExpCondition;
 import com.frw.util.PageLoadWaitUtil;
 import com.frw.util.WaitUtil;
 import com.frw.wait.ExplicitWaitUtil;
@@ -549,7 +550,7 @@ public class KeysUtil extends KeyMethods{
 			Reporting.logStep(driver, refID, Step,  objectType+": "+objectLocator+" does not exists hence cannot select a radiobutton ", Constants_FRMWRK.Fail);
 		}
 		else{
-			element=ExplicitWaitUtil.fetchRadiobuttonFromGroup(driver,locatorType, objectLocator, input,Constants_TimeOuts.Element_TimeOut);
+			element=ExplicitWaitUtil.fetchRadiobuttonFromGroup(driver, locatorType, objectLocator, input,ExpCondition.PRESENCE, "value", Constants_TimeOuts.Element_TimeOut);
 			boolean Rtick=Constants_FRMWRK.TrueB;
 			Rtick=element.isSelected();
 			if(!Rtick){
