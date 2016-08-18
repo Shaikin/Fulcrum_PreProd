@@ -303,7 +303,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 		Transmittals_EntryPage.attachdocument(appName,driver, refID, testcaseName, workFlow, data);
 
 		clickSend(driver, workFlow);
-		WaitUtil.pause(Constants_TimeOuts.Save_TimeOut);
+		WaitUtil.pause(Constants_TimeOuts.processToComplete);
 		ApplicationMethods.closeAllDialogs(driver, refID, testcaseName);
 		return returnData;
 	}
@@ -323,7 +323,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 	public static void editAndSubmitTransmittalRecord(String appName,WebDriver driver,String refID,String testcaseName,String workFlow,Hashtable<String,String> data,String action) throws Throwable{
 		ApplicationMethods.switchToLatestDLGframe(driver, testcaseName);
 		if(appName.equals(Constants.App_Fulcrum)){
-			if(data.get("Tramsmittals-TxType").equalsIgnoreCase("Change Note")){
+			if(!data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_Corresponce)){
 				if(action.equalsIgnoreCase("APPROVED") || action.equalsIgnoreCase("REJECTED")){
 					res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-Approve/Reject", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, action);
 				}
@@ -497,8 +497,8 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 		
 	}
 	
-	/*public static void verifyAttachedFiles(String appName,WebDriver driver,String testcasename,String refid,String workflow,Hashtable<String,String>data) throws Throwable{
-		if(data.get(Constants_Workflow.FluidTX_WorkFlow_Data_Condition).equalsIgnoreCase(Constants_Workflow.FluidTX_WorkFlow_IssuedForReview) && !data.get("ReviewDocument").isEmpty()){
+	public static void verifyAttachedFiles(String appName,WebDriver driver,String testcasename,String refid,String workflow,Hashtable<String,String>data) throws Throwable{
+		if(data.get(Constants_Workflow.Fulcrum_WorkFlow_Data_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_ConsultantAdvice) && !data.get("ReviewDocument").isEmpty()){
 			ApplicationMethods.switchToLatestDLGframe(driver, testcasename);
 			String locator=objects_objectLocator_Transmittals.get("Tramsmittals-View - Attached Review Document Files").replaceAll("docName", data.get("ReviewDocument"));
 			objects_objectLocator_Transmittals.put("Tramsmittals-View - Attached Review Document Files", locator);
@@ -518,7 +518,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 			objects_objectLocator_Transmittals.put("Tramsmittals-View -Supporting Document Files", locator);
 			KeyMethods.f_fetchElementDetails(driver, refid, testcasename, workflow, "Tramsmittals-View -Supporting Document Files", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, data.get("AttachSupportDocumentName"));
 		}
-	}*/
+	}
 	
 	public static void verifyAttachedFilesAndClick(String appName,WebDriver driver,String testcasename,String refid,String workflow,Hashtable<String,String>data) throws Throwable{
 		
