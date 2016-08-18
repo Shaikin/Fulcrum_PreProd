@@ -108,6 +108,27 @@ public class Navigations_Fulcrum extends TestBase{
 
 
 	}
+	
+	public static String navigateToActionRequiredAndGetCount(WebDriver driver,String refid,String testcasename,String workflow) throws Throwable{
+		commonMethods.switchToDefaultPage(driver);		
+		res=KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Usersite Menu - Action Required Count",objects_locatorType_Navigation, objects_objectType_Navigation, objects_objectLocator_Navigation, input);
+		if(res.equals(Constants_FRMWRK.False)){
+			CustomExceptions.Exit(objects_objectLocator_Navigation.get("Usersite Menu - Action Required Count"), " Navigate Failure - Usersite Menu - Action Required", "Please refer above details for more details");
+		}
+
+		return res;
+
+	}
+	public static String navigateToActionOverAndGetCount(WebDriver driver,String refid,String testcasename,String workflow) throws Throwable{
+		commonMethods.switchToDefaultPage(driver);		
+		res=KeyMethods.f_performAction(driver, refid, testcasename, workflow, "Usersite Menu - Actions Overdue Count",objects_locatorType_Navigation, objects_objectType_Navigation, objects_objectLocator_Navigation, input);
+		if(res.equals(Constants_FRMWRK.False)){
+			CustomExceptions.Exit(objects_objectLocator_Navigation.get("Usersite Menu - Actions Overdue Count"), " Navigate Failure - Usersite Menu - Action Required", "Please refer above details for more details");
+		}
+
+		return res;
+
+	}
 
 	public static class Transmittals{
 		public static void navigateToNewTransmittal(WebDriver driver) throws Throwable{
