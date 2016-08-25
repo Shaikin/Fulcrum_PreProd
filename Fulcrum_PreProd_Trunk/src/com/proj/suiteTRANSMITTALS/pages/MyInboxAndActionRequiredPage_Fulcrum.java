@@ -101,7 +101,8 @@ public class MyInboxAndActionRequiredPage_Fulcrum extends TestSuiteBase{
 				subject=data.get("Tramsmittals-Subject");
 			}
 		}
-		else if(!(data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_Corresponce))&& action.equals("Rejected")){
+		// Hard coding the Ovedue to reject status as per test case.
+		else if(!(data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_Corresponce))&& action.equals("Rejected") || action.equals("Overdue")){
 			status="Rejected";
 			TxComplete_Status="Closed";
 			subject=data.get("Tramsmittals-Subject");
