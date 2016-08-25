@@ -322,17 +322,21 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 	 */
 	public static void editAndSubmitTransmittalRecord(String appName,WebDriver driver,String refID,String testcaseName,String workFlow,Hashtable<String,String> data,String action) throws Throwable{
 		ApplicationMethods.switchToLatestDLGframe(driver, testcaseName);
-		if(appName.equals(Constants.App_Fulcrum)){
+		
 			if(!data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_Corresponce)){
-				if(action.equalsIgnoreCase("APPROVED") || action.equalsIgnoreCase("REJECTED")){
+				if(action.equalsIgnoreCase("APPROVED") || action.equalsIgnoreCase("REJECTED") || action.equalsIgnoreCase("OVERDUE")){
+					if(action.equalsIgnoreCase("OVERDUE")){
+						//Hard cording the Overdue action to reject as per the test case need to evaluate later
+						action="REJECTED";
+					}
 					res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-Approve/Reject", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, action);
 				}
 			}
-			else if(data.get("Tramsmittals-TxType").equalsIgnoreCase("Consultant Advice")||data.get(Constants_Workflow.FluidTX_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.FluidTX_WorkFlow_IssuedForReview)){
+			else if(data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_ConsultantAdvice)){
 				res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-Comments", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, action);
 			}			
-		}
-		else if (appName.equals(Constants.App_Fluid)){
+		
+		/*else if (appName.equals(Constants.App_Fluid)){
 			if(data.get(Constants_Workflow.FluidTX_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.FluidTX_WorkFlow_IssuedForReview)){
 				res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-Comments", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, action);	
 			}
@@ -340,11 +344,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 				if(action.equalsIgnoreCase("APPROVED") || action.equalsIgnoreCase("REJECTED")){
 					res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Tramsmittals-Approve/Reject", objects_locatorType_Transmittals, objects_objectType_Transmittals, objects_objectLocator_Transmittals, action);
 				}
-			}
-
-		}
-
-
+			}*/
 		clickSubmit(driver, workFlow);
 		ApplicationMethods.closeAllDialogs(driver, refID, testcaseName);
 	}
