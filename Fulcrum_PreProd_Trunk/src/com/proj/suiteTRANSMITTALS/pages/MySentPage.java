@@ -35,12 +35,16 @@ public class MySentPage extends TestSuiteBase{
 		}
 		else if (data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_ConsultantAdvice)){
 		*/
+		else if((!data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_Corresponce))&& data.get("Action-Level2").equalsIgnoreCase("Overdue")){
+			status="Overdue";
+			TxComplete_Status="Open";
+			subject=data.get("Tramsmittals-Subject");
+		}
 		else if (!data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_Corresponce)){
 			TxComplete_Status ="Open";
 			status  ="Outstanding";
 			subject=data.get("Tramsmittals-Subject");
 		}
-
 		else if((data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_ChangeNote)||data.get(Constants_Workflow.Fulcrum_WorkFlow_Condition).equalsIgnoreCase(Constants_Workflow.Fulcrum_WorkFlow_ConsultantAdvice))&& data.get("Action-Level2").equalsIgnoreCase("Forward")){
 			TxComplete_Status   ="Open";
 			status="Outstanding";
