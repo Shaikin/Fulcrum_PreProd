@@ -1,20 +1,16 @@
 package com.proj.suiteDOCS;
 import java.util.Hashtable;
 
-import org.openqa.selenium.WebDriver;
+
 import org.testng.annotations.Test;
 
 import com.frw.Constants.Constants_FRMWRK;
-import com.frw.util.WaitUtil;
-import com.frw.wait.ExplicitWaitUtil;
-import com.proj.Constants.Constants_ConfigProperties;
+
 import com.proj.navigations.Navigations_Fulcrum;
-import com.proj.objectRepository.ObjRepository;
+
 import com.proj.suiteDOCS.reusables.SiteContents;
 import com.proj.util.CustomExceptions;
 import com.proj.util.TestExecutionUtil; 
-import com.proj.utilFulcrum.ApplicationMethods;
-import com.proj.utilFulcrum.WebTableUtil;
 
 public class DMS_TransmittalFolderView extends TestSuiteBase {
 
@@ -48,7 +44,7 @@ public class DMS_TransmittalFolderView extends TestSuiteBase {
 			SiteContents.clickTxFolderView(driver_DOCS, workFlow_CreateTxFolderView);
 			String Txname = SiteContents.txFolderName(driver_DOCS, workFlow_CreateTxFolderView, data);
 			SiteContents.mailIds(driver_DOCS, workFlow_CreateTxFolderView, data);
-			//SiteContents.clickSave(driver_DOCS, workFlow_CreateTxFolderView);
+			
 			SiteContents.saveTxFolder(driver_DOCS, workFlow_CreateTxFolderView);
 			SiteContents.verifyAndClickTxFolderAdded(driver_DOCS, workFlow_CreateTxFolderView, Txname);
 			SiteContents.verifyDocAttachedInTx(driver_DOCS, testcaseName);
