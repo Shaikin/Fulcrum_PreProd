@@ -179,20 +179,22 @@ public class Navigations_Fulcrum extends TestBase{
 	}
 	public static class Settings{
 		
-		public static void navigateToSettingsWheel(WebDriver driver,String workFlow){
-			res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Settings Wheel", objects_locatorType_Navigation, objects_objectType_Navigation, objects_objectLocator_Navigation, input);
-			WaitUtil.pause(6);
+			public static void navigateToSettingsWheel(WebDriver driver,String workFlow) throws Exception{
+				res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Settings Wheel", objects_locatorType_Navigation, objects_objectType_Navigation, objects_objectLocator_Navigation, input);
+				if(res.equals(Constants_FRMWRK.False)){
+					CustomExceptions.Exit(objects_objectLocator_Navigation.get("Settings Wheel"), " Navigate Failure - My Sent", "Please refer above details for more details");
+				}			
+			}
 			
-		}
-		
-		public static void navigateToSiteContents(WebDriver driver,String workFlow){
-			res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Settings Wheel", objects_locatorType_Navigation, objects_objectType_Navigation, objects_objectLocator_Navigation, input);
-			WaitUtil.pause(6);
-			res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Site contents", objects_locatorType_Navigation, objects_objectType_Navigation, objects_objectLocator_Navigation, input);
-			WaitUtil.pause(6);
-		}
-	    }
-		}
+			public static void navigateToSiteContents(WebDriver driver,String workFlow) throws Exception{
+				navigateToSettingsWheel(driver,workFlow);
+				res=KeyMethods.f_performAction(driver, refID, testcaseName, workFlow, "Site contents", objects_locatorType_Navigation, objects_objectType_Navigation, objects_objectLocator_Navigation, input);
+				if(res.equals(Constants_FRMWRK.False)){
+					CustomExceptions.Exit(objects_objectLocator_Navigation.get("Site contents"), " Navigate Failure - My Sent", "Please refer above details for more details");
+				}
+			}
+		    }
+			}
 
 
 
