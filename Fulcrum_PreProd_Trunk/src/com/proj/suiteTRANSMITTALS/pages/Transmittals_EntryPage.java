@@ -217,7 +217,7 @@ public class Transmittals_EntryPage extends TestSuiteBase{
 	 */
 	public static void waitInvisiblilityofWorkingTitle(WebDriver driver){
 		commonMethods.switchToDefaultPage(driver);
-		boolean tt=ExplicitWaitUtil.waitUntilInvisibilityOfElement(driver, Constants_FRMWRK.FindElementByXPATH, com.proj.objectRepository.ObjRepository.heading_working, 20);
+		boolean tt=ExplicitWaitUtil.waitUntilInvisibilityOfElement(driver, Constants_FRMWRK.FindElementByXPATH, com.proj.objectRepository.ObjRepository.heading_working, Constants_TimeOuts.Overlay_disappear);
 		System.out.println("Working.. invisibility.."+tt);
 	}
 	
