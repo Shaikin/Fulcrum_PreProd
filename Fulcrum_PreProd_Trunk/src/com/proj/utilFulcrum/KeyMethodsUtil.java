@@ -170,12 +170,16 @@ public class KeyMethodsUtil extends TestBase{
 			element.click();
 			try{
 				//commonMethods.switchToFrameFromDefault(driver, testcaseName, Constants_FRMWRK.FindElementByXPATH, ObjRepository.frame_double);
+				
 				ApplicationMethods.switchToLatestDLGframe(driver,testcasename);
+				
+				boolean prvPageDispayed=commonMethods.isElementDisplayed(driver,Constants_FRMWRK.FindElementByXPATH,ObjRepository.choice_prvpage);
+				if( prvPageDispayed ==true){
 				WebElement prvPage=ExplicitWaitUtil.waitForElement(driver, Constants_FRMWRK.FindElementByXPATH, ObjRepository.choice_prvpage, Constants_TimeOuts.Element_TimeOut);
-				if(prvPage!=null && prvPage.isDisplayed()==true){
-					prvPage.click();
-					WaitUtil.pause(Constants_TimeOuts.generic_TimeOut);
+				prvPage.click();
+				               WaitUtil.pause(Constants_TimeOuts.generic_TimeOut);
 				}
+	
 				WebElement choice=ExplicitWaitUtil.waitForElement(driver, Constants_FRMWRK.FindElementByXPATH, ".//*[text()='"+input+"']", Constants_TimeOuts.Element_TimeOut);
 				choice.click();				
 				try{

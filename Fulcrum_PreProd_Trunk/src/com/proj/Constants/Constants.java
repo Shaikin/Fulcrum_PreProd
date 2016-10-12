@@ -46,7 +46,7 @@ public class Constants {
 	public static final String OR_Popup_Path=System.getProperty("user.dir")+"\\src\\com\\proj\\objectRepository\\ObjectsFile_Popup.xlsx";
 	public static final String OR_TRANS_Path=System.getProperty("user.dir")+"\\src\\com\\proj\\objectRepository\\ObjectsFile_Transmittals.xlsx";
 	public static final String OR_DOCS_Path=System.getProperty("user.dir")+"\\src\\com\\proj\\objectRepository\\ObjectsFile_Documents.xlsx";
-
+	public static final String OR_Settings_Path=System.getProperty("user.dir")+"\\src\\com\\proj\\objectRepository\\ObjectsFile_Settings.xlsx";
 	
 	
 	//Data sheets Path

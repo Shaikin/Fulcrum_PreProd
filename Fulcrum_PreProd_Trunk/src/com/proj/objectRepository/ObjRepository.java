@@ -9,12 +9,16 @@ public class ObjRepository {
 	public static String button_login_Login="logon:logon";	
 	
 	//Homepage
-	public static String homePage_element="txtSearch";
+	public static String homePage_element="crlHomeImage";
+	
 	
 	//Overlays
 	public static String heading_working=".//*[@title='Working on it...']";
 	public static String overlay_working=".//*[text()='Working on it...']";
-
+	public static String popup_AddingDMSDocumentLibrary=".//*[@title='Adding DMS Document Library']";
+	public static String overlay_loadingAppForInformation=".//*[text()='Loading App information...']";
+	public static String heading_NewFolder=".//*[@title='New Folder']";
+	
 	//logout objects
 	//public static String link_user="zz5_Menu";
 	public static String menu_logout="zz5_Menu";
@@ -47,6 +51,7 @@ public class ObjRepository {
 	public static String container_supportingDocumentFiles="supportingDocumentFiles";
 	public static String grid_nextButton=".//*[@id='pagingWPQ2next']/a";
 	public static String container_uploadedOrNewDocuments="Documents";
+	public static String container_dmsLibrary="Automation DMS Library";
 	
 	//close
 	public static String icon_close="//*[@title='Close dialog']";	

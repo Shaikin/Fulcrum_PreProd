@@ -8,6 +8,7 @@ import com.frw.Constants.Constants_FRMWRK;
 import com.frw.util.DateUtil;
 import com.frw.util.WaitUtil;
 import com.frw.util.Xls_Reader;
+import com.frw.wait.ExplicitWaitUtil;
 import com.proj.Constants.Constants;
 import com.proj.Constants.Constants_TimeOuts;
 import com.proj.library.KeyMethods;
@@ -300,6 +301,40 @@ public class Documents_EntryPage extends TestSuiteBase{
 		WaitUtil.pause(10);
 		DocumentRegisterGridUtil.validateVersion(driver, refID,workflow, testcaseName, getName, version);
 }
+	/**
+	 * Waits until the popup "Adding DMS Document Library" disappears from page
+	 * @author anupama
+	 * @param driver
+	 */
+	public static void waitInvisiblilityofPopUpDMSDocumentLibrary(WebDriver driver){
+		commonMethods.switchToDefaultPage(driver);
+		boolean tt=ExplicitWaitUtil.waitUntilInvisibilityOfElement(driver, Constants_FRMWRK.FindElementByXPATH, com.proj.objectRepository.ObjRepository.popup_AddingDMSDocumentLibrary, Constants_TimeOuts.Overlay_disappear);
+		System.out.println("Adding DMS Document Library..."+tt);
+	}
+	
+	/**
+	 * Waits until the  Loading App information...disappears from page
+	 * @author anupama
+	 * @param driver
+	 */
+	public static void waitInvisiblilityofLoadingAppInformation(WebDriver driver){
+		commonMethods.switchToDefaultPage(driver);
+		boolean tt=ExplicitWaitUtil.waitUntilInvisibilityOfElement(driver, Constants_FRMWRK.FindElementByXPATH, com.proj.objectRepository.ObjRepository.overlay_loadingAppForInformation, Constants_TimeOuts.Overlay_disappear);
+		System.out.println("Loading App information..."+tt);
+	}
+	
+	/**
+	 * Waits until the  New folder..disappears from page
+	 * @author anupama
+	 * @param driver
+	 */
+	public static void waitInvisiblilityofNewFolder(WebDriver driver){
+		commonMethods.switchToDefaultPage(driver);
+		boolean tt=ExplicitWaitUtil.waitUntilInvisibilityOfElement(driver, Constants_FRMWRK.FindElementByXPATH, com.proj.objectRepository.ObjRepository.heading_NewFolder, Constants_TimeOuts.Overlay_disappear);
+		System.out.println("New Folder..."+tt);
+	}
+	
+	
 }
 	
 	

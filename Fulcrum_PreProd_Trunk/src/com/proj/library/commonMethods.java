@@ -374,15 +374,15 @@ public class commonMethods extends TestBase{
 	 * @return
 	 */
 	
-	@SuppressWarnings("unused")
+	
 	public static boolean isElementDisplayed(WebDriver driver,String locatorType,String locator){
 		boolean flag=Constants_FRMWRK.FalseB;
 		WebElement element=null;
 		
 		try{
-			ExplicitWaitUtil.waitForElement(driver, locatorType, locator, Constants_TimeOuts.Element_TimeOut);
+			element = ExplicitWaitUtil.waitForElement(driver, locatorType, locator, Constants_TimeOuts.Element_TimeOut);
 		}catch(Throwable t){
-			
+			//t.printStackTrace();
 		}		
 		if(element!=null){
 			if(element.isDisplayed()==true){

@@ -453,7 +453,7 @@ public class WebTableUtil extends TestBase{
 
 		String colXpath_search= "//table[@summary='containerName']/descendant :: tr /td[ToSearchColumn]";
 		if(actionColumnType.equalsIgnoreCase("LINK")){
-			colXpath_action="//table[@summary='containerName']/descendant :: tr /td[actionPerformCol]/a";
+			colXpath_action="//table[@summary='containerName']/descendant :: tr /td[actionPerformCol]/descendant ::a";
 		}
 		/*else if (actionColumnType.equalsIgnoreCase("Child Node Text")){
 			colXpath_action="//table[@summary='containerName']/descendant :: tr /td[actionPerformCol]/span";
@@ -496,7 +496,8 @@ public class WebTableUtil extends TestBase{
 						WaitUtil.pause(100L);				
 						int counter=0;
 
-						try{							
+						try{	
+							
 							while (counter< 5){
 								try{
 									rows_action.get(rowCount).click();
@@ -779,6 +780,43 @@ public class WebTableUtil extends TestBase{
 		catch (Exception ex){
 			logsObj.log("Unable to click the next page from webtable due to "+commonMethods.getStackTrace(ex));
 		}
+		return flag;
+	}
+	/**
+	 * 
+	 * @date Sep 19 2016
+	 * @param driver
+	 * @param testcaseName
+	 * @param Step
+	 * @param containerName
+	 * @param colToSearch
+	 * @return
+	 * @throws Throwable
+	 */
+	public static Integer getNumberOfRecordsFromTable(WebDriver driver,String testcaseName,String Step,String containerName,int colToSearch) throws Throwable{
+		int flag=0;
+
+		WebElement webtableElement=ExplicitWaitUtil.waitForElement(driver, Constants_FRMWRK.FindElementByXPATH, "//table[@summary='"+containerName+"']",Constants_TimeOuts.Element_TimeOut);
+		if(webtableElement==null){
+			Reporting.logStep(driver, Step, "Webtable-"+ containerName+" is not displayed on the page to get the records of the grid", Constants_FRMWRK.Fail);
+			
+		}
+
+		String colXpath_search= "//table[@summary='containerName']/descendant :: tr /td[ToSearchColumn]";		
+		
+		colXpath_search=commonMethods.replaceString("containerName",colXpath_search,containerName);
+		colXpath_search=commonMethods.replaceString("ToSearchColumn",colXpath_search,Integer.toString(colToSearch));
+		
+		try{
+			logsObj.log("Get Grid row count for column under search");
+			final List<WebElement> rows_search = waitUntilAllVisible(driver,colXpath_search);			
+			flag=rows_search.size();
+		}catch(Exception e){
+			isTestPass=Constants_FRMWRK.FalseB;			
+			Reporting.logStep(driver, Step, "getNumberOfRecordsFromTable : Could not get count of records for the given table "+colXpath_search+" due to error-->"+e+ "and stack is "+commonMethods.getStackTrace(e), Constants_FRMWRK.Fail);
+			return flag;		
+		}
+
 		return flag;
 	}
 
